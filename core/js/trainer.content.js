@@ -167,6 +167,9 @@ function printPokemon(pokemon, pokeimg_suffix, iv_numbers, locale) {
 	);
 	trainerPokemon.append($('<p>', { class: 'pkmn-name' }).append(pokemon.cp));
 	var progressBar
+	var progressBarIV
+	var IV
+	var IVPerc
 	if (iv_numbers) {
 		progressBar = $('<div>', { class: 'progress' }).css({ 'height': '15px', 'margin-bottom': '0' });
 		progressBar.append(
@@ -228,15 +231,69 @@ function printPokemon(pokemon, pokeimg_suffix, iv_numbers, locale) {
 				'aria-valuemin': 0,
 				'aria-valuemax': 45
 			}).css('width', ((100 / 45) * pokemon.iv_stamina) + '%'))
+			
+		IV = parseInt(pokemon.iv_attack) + parseInt(pokemon.iv_defense) + parseInt(pokemon.iv_stamina);
+		IVPerc = Math.round((IV/45)*100);
+		if(IVPerc == 100){
+		progressBarIV = $('<div>',{class : 'progress'}).css({'background-color':'#cccccc','height': '15px','margin-bottom': '0','margin-top': '2px'});
+		progressBarIV.append(
+					$('<div>',
+					{
+						class: 'progress-bar progress-bar-warning progress-bar-striped' ,
+						role : 'progressbar',
+						title: 'IV-Wert',
+						text : '' + IVPerc + '%',
+						'aria-valuenow' :parseInt(IV),
+						'aria-valuemin' : 0,
+						'aria-valuemax' : 45
+					}).css({'width': (parseInt(IV) / 45)*100 + '%','line-height': '16px','color':'black'}))
+		}
+		else if(IVPerc > 90){
+		progressBarIV = $('<div>',{class : 'progress'}).css({'background-color':'#cccccc','height': '15px','margin-bottom': '0','margin-top': '2px'});
+		progressBarIV.append(
+					$('<div>',
+					{
+						class: 'progress-bar progress-bar-success progress-bar-striped ' ,
+						role : 'progressbar',
+						title: 'IV-Wert',
+						text : '' + IVPerc + '%',
+						'aria-valuenow' :parseInt(IV),
+						'aria-valuemin' : 0,
+						'aria-valuemax' : 45
+					}).css({'width': (parseInt(IV) / 45)*100 + '%','line-height': '16px','color':'black'}))
+		}
+		else if(IVPerc <= 40){
+		progressBarIV = $('<div>',{class : 'progress', text : '' + IVPerc + '%', title: 'IV-Wert' }).css({'background-color':'#cccccc','color':'black','line-height': '16px','height': '15px','margin-bottom': '0','margin-top': '2px'});
+		progressBarIV.append(
+					$('<div>',
+					{
+						class: 'progress-bar progress-bar-danger progress-bar-striped ' ,
+						role : 'progressbar',
+						'aria-valuenow' :parseInt(IV),
+						'aria-valuemin' : 0,
+						'aria-valuemax' : 45
+					}).css({'width': (parseInt(IV) / 45)*100 + '%','line-height': '16px'}))
+		}
+		else{
+		progressBarIV = $('<div>',{class : 'progress'}).css({'background-color':'#cccccc','height': '15px','margin-bottom': '0','margin-top': '2px'});
+		progressBarIV.append(
+					$('<div>',
+					{
+						class: 'progress-bar progress-bar-info progress-bar-striped ' ,
+						role : 'progressbar',
+						title: 'IV-Wert',
+						text : '' + Math.round(IVPerc) + '%',
+						'aria-valuenow' :parseInt(IV),
+						'aria-valuemin' : 0,
+						'aria-valuemax' : 45
+					}).css({'width': (parseInt(IV) / 45)*100 + '%','line-height': '16px','text-align': 'center','color':'black'}))
+		}
 	}
 	trainerPokemon.append(progressBar);
+	trainerPokemon.append(progressBarIV);
 	if (pokemon.deployment_time) {
 		var diff = (new Date() - new Date(pokemon.deployment_time.replace(/-/g, '/'))) / 1000;
-		if (diff >= 86400) {
-			trainerPokemon.append($('<small>', { text: parseInt(diff / 86400) + 'd ' + parseInt(diff % 3600) + 'h'}));
-		} else {
-			trainerPokemon.append($('<small>', { text: parseInt(diff / 3600) + 'h ' + parseInt(diff % 60) + 'm' }));
-		}
+		trainerPokemon.append($('<small>', { text: parseInt(diff / 3600) + 'h ' + parseInt((diff / 60) % 60) + 'm' }));
 	} else if (pokemon.last_scanned === '1') {
 		trainerPokemon.append($('<small>', { text: pokemon.last_scanned + ' ' + locale.day }));
 	} else {

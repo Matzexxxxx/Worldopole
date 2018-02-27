@@ -43,7 +43,7 @@ include_once('core/process/data.loader.php');
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?= HOST_URL ?>"><img src="<?= $config->infos->logo_path ?>" width="25" style="display:inline-block;" alt="<?= $config->infos->site_name ?>" id="logo-img" /> <?= $config->infos->site_name ?></a>
+					<a class="navbar-brand" href="<?= HOST_URL ?>"><img src="<?= $config->infos->logo_path ?>" width="50" style="display:inline-block;color:#F0F0F0;" alt="<?= $config->infos->site_name ?>" id="logo-img" /> <?= $config->infos->site_name ?></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->

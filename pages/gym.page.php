@@ -78,11 +78,6 @@
 </div>
 <?php } ?>
 
-<div class="row">
-	<div class="col-md-12">
-		<div id="map"></div>
-	</div>
-</div>
 <div id="gym_details_template_container">
 	<div class="row area gym_details" id="gym_details_template">
 		<div id="gymDetail">

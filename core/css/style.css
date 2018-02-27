@@ -6,6 +6,7 @@ General styles
 body{
 	font-family: 'Lato', sans-serif;
 	color: #000;
+	background-color: #E8E8E8;
 	padding-top: 8em;
 }
 
@@ -71,20 +72,27 @@ Navigation
 ****************/
 
 .navbar-default{
-	background-color: #fff;
+	background-color: #383838;
 }
 
-#logo-img {
+#logo-img{
 	animation: shake 1s;
 	animation-iteration-count: 3;
+	animation-duration: 0.5s;
 }
 
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
-	color:#174391;
+	color:#ffffff;
 }
 
 .navbar-default .navbar-brand {
-	color:#174391;
+	color:#ffffff;
+	padding: 0px;
+	padding-bottom:10px;
+}
+
+.menu-label{
+	color:#ffffff;
 }
 
 /****************
@@ -100,7 +108,7 @@ Page Header
 }
 
 #single-header h1 small {
-	font-size:0.5em;
+	font-size:.5em;
 }
 
 /****************
@@ -344,7 +352,7 @@ Website footer
 ****************/
 
 footer {
-	background-color:#174391;
+background-color: #282828;
 	margin-top:4em;
 	padding-bottom: 4em;
 	color:white;
